@@ -1,0 +1,3 @@
+# Conectando banco de dados ao Java 
+
+A classe DB gerencia a conexão com um banco de dados em um aplicativo Java. Ela se assegura de que uma única conexão seja usada em todo o aplicativo, o que é mais eficiente. Quando o método getConnection() é chamado, ele verifica se a conexão já foi criada; se não, ele a cria usando informações de conexão armazenadas em um arquivo chamado db.properties. A classe também possui um método para fechar a conexão quando não for mais necessária, ajudando a liberar recursos. Se ocorrer algum problema ao criar a conexão ou ler o arquivo, a classe lança uma exceção personalizada para sinalizar o erro. Em resumo, a classe DB facilita a gestão da conexão com o banco de dados e garante que os recursos sejam usados de forma adequada.
