@@ -8,7 +8,7 @@ public class Ticket {
     private String cancelaSaida;
     private Timestamp horaEntrada;
     private Timestamp horaSaida;
-    private Integer vaga;
+    private int vaga;
     private double totalValor;
 
 
