@@ -1,4 +1,4 @@
-package org.example.enums;
+package org.projetoEstacionamento.enums;
 
 public enum vehicleEnum {
     carrosPasseio,

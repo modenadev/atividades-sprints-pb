@@ -1,20 +1,22 @@
-package org.example.entities;
+package org.projetoEstacionamento.entities;
+
+import java.sql.Timestamp;
 
 public class Ticket {
 
     private String cancelaEntrada;
     private String cancelaSaida;
-    private String horaEntrada;
-    private String horaSaida;
+    private Timestamp horaEntrada;
+    private Timestamp horaSaida;
     private Integer vaga;
-    private Integer totalValor;
+    private double totalValor;
 
 
     public Ticket(String cancelaEntrada, String cancelaSaida, String horaEntrada, String horaSaida, Integer vaga, Integer totalValor) {
         this.cancelaEntrada = cancelaEntrada;
         this.cancelaSaida = cancelaSaida;
-        this.horaEntrada = horaEntrada;
-        this.horaSaida = horaSaida;
+        this.horaEntrada = Timestamp.valueOf(horaEntrada);
+        this.horaSaida = Timestamp.valueOf(horaSaida);
         this.vaga = vaga;
         this.totalValor = totalValor;
     }
@@ -35,20 +37,20 @@ public class Ticket {
         this.cancelaSaida = cancelaSaida;
     }
 
-    public String getHoraEntrada() {
+    public Timestamp getHoraEntrada() {
         return horaEntrada;
     }
 
     public void setHoraEntrada(String horaEntrada) {
-        this.horaEntrada = horaEntrada;
+        this.horaEntrada = Timestamp.valueOf(horaEntrada);
     }
 
-    public String getHoraSaida() {
+    public Timestamp getHoraSaida() {
         return horaSaida;
     }
 
     public void setHoraSaida(String horaSaida) {
-        this.horaSaida = horaSaida;
+        this.horaSaida = Timestamp.valueOf(horaSaida);
     }
 
     public Integer getVaga() {
@@ -60,7 +62,7 @@ public class Ticket {
     }
 
     public Integer getTotalValor() {
-        return totalValor;
+        return (int) totalValor;
     }
 
     public void setTotalValor(Integer totalValor) {

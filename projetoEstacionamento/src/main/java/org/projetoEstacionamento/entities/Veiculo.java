@@ -1,6 +1,6 @@
-package org.example.entities;
+package org.projetoEstacionamento.entities;
 
-public class Veiculo {
+public class Veiculo  {
 
     private String placa;
     private String TipoVeiculo;
