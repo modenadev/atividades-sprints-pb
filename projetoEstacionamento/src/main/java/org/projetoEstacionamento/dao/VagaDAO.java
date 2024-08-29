@@ -1,7 +1,6 @@
 package org.projetoEstacionamento.dao;
 
 import org.projetoEstacionamento.entities.Vaga;
-import org.projetoEstacionamento.entities.VeiculoComum;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -35,6 +34,7 @@ public class VagaDAO {
             stmt.executeUpdate();
         }
     }
+
     public Vaga obterVagaPorId(int vagaId) throws SQLException {
         String sql = "SELECT * FROM vagas WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
