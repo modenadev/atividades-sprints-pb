@@ -1,6 +1,6 @@
 package org.projetoEstacionamento.dao;
 
-import org.projetoEstacionamento.entities.Veiculo;
+import org.projetoEstacionamento.entities.VeiculoComum;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,8 +16,7 @@ public class VeiculoDAO {
         return DriverManager.getConnection(url, user, password);
     }
 
-
-    public static void adicionarVeiculo(String placa, String tipo, String categoria) {
+    public static void adicionarVeiculoComum(String placa, String tipo, String categoria) {
         String sql = "INSERT INTO veiculos (placa, tipo, categoria) VALUES (?, ?, ?)";
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, placa);
@@ -26,21 +25,36 @@ public class VeiculoDAO {
             stmt.executeUpdate();
             System.out.println("Veículo adicionado com sucesso!");
         } catch (SQLException e) {
+            if (e.getSQLState().equals("22001")) { // O código SQLState para truncamento de dados é 22001
+                System.out.println("Erro: A placa excedeu o máximo de caracteres permitido: " + e.getMessage());
+            }
             if (e.getSQLState().equals("23000")) { // Código de estado SQL para violação de chave única
                 System.out.println("Erro: Veículo com a placa '" + placa + "' já existe.");
-            } else {
-                System.out.println("Erro ao adicionar veículo: " + e.getMessage());
             }
         }
     }
 
-    public static Veiculo buscarVeiculo(String placa) throws SQLException {
+    public static void adicionarVeiculoMensalista(String placaMensalista) {
+        String sql = "INSERT INTO mensalistas (placa) VALUES (?)";
+        try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, placaMensalista);
+            stmt.executeUpdate();
+            System.out.println("Veículo adicionado com sucesso!");
+
+        } catch (SQLException e) {
+            if (e.getSQLState().equals("23000")) { // Código de estado SQL para violação de chave única
+                System.out.println("Erro: Veículo mensalista com a placa '" + placaMensalista + "' já existe.");
+            }
+        }
+    }
+
+    public static VeiculoComum buscarVeiculo(String placa) throws SQLException {
         String sql = "SELECT * FROM veiculos WHERE placa = ?";
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, placa);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                Veiculo veiculo = new Veiculo();
+                VeiculoComum veiculo = new VeiculoComum();
                 veiculo.setPlaca(rs.getString("placa"));
                 veiculo.setTipo(rs.getString("tipo"));
                 veiculo.setCategoria(rs.getString("categoria"));
@@ -52,13 +66,13 @@ public class VeiculoDAO {
         return null;
     }
 
-    public List<Veiculo> listarVeiculos() throws SQLException {
-        List<Veiculo> veiculos  = new ArrayList<>();
+    public List<VeiculoComum> listarVeiculos() throws SQLException {
+        List<VeiculoComum> veiculos  = new ArrayList<>();
         String sql = "SELECT * FROM veiculos";
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Veiculo veiculo = new Veiculo();
+                VeiculoComum veiculo = new VeiculoComum();
                 veiculo.setPlaca(rs.getString("placa"));
                 veiculo.setTipo(rs.getString("tipo")); // Certifique-se de definir o tipo
                 veiculo.setCategoria(rs.getString("categoria")); // status como String
@@ -67,9 +81,6 @@ public class VeiculoDAO {
         }
         return veiculos;
     }
-
-
-
 }
 
 

@@ -16,7 +16,7 @@ public enum vehicleEnum {
         return quantidadeVagas;
     }
 
-    // Método para obter o valor do enum pelo nome
+    // Método para obter o valor do enum pelo nome //
     public static int getQuantidadeDeVagasPorVeiculo(String veiculo) {
         try {
             return vehicleEnum.valueOf(veiculo).getValor();

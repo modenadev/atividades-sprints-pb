@@ -12,15 +12,8 @@ public class EntradaSaida {
     private int vagaId;
     private double valorPago;
 
-    public EntradaSaida(int id, String placa, Date horaEntrada, Date horaSaida, int cancelaEntrada, int cancelaSaida, int vagaId, double valorPago) {
-        this.id = id;
-        this.placa = placa;
-        this.horaEntrada = horaEntrada;
-        this.horaSaida = horaSaida;
-        this.cancelaEntrada = cancelaEntrada;
-        this.cancelaSaida = cancelaSaida;
-        this.vagaId = vagaId;
-        this.valorPago = valorPago;
+    public EntradaSaida() {
+
     }
 
     public int getId() {

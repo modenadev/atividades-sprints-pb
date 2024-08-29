@@ -1,7 +1,7 @@
 package org.projetoEstacionamento.dao;
 
 import org.projetoEstacionamento.entities.Vaga;
-import org.projetoEstacionamento.entities.Veiculo;
+import org.projetoEstacionamento.entities.VeiculoComum;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -28,11 +28,6 @@ public class VagaDAO {
         }
     }
 
-
-    public void ocuparVaga(int vagaId, Veiculo veiculo) throws SQLException {
-
-    }
-
     public void liberarVaga(int vagaId) throws SQLException {
         String sql = "UPDATE vagas SET status = 'Livre', veiculo_id = NULL WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -40,7 +35,6 @@ public class VagaDAO {
             stmt.executeUpdate();
         }
     }
-
     public Vaga obterVagaPorId(int vagaId) throws SQLException {
         String sql = "SELECT * FROM vagas WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {

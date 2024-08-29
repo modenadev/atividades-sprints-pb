@@ -4,15 +4,9 @@ public class Vaga {
     private int numero;
     private int id;
     private String tipo;
+    private String categoria;
     private String status;
 
-
-    public Vaga(int numero, int id, String tipo, String status) {
-        this.numero = numero;
-        this.id = id;
-        this.tipo = tipo;
-        this.status = status;
-    }
 
     public Vaga() {
 
@@ -35,11 +29,11 @@ public class Vaga {
     }
 
     public String getCategoria() {
-        return tipo;
+        return categoria;
     }
 
-    public void setCategoria(String tipo) {
-        this.tipo = tipo;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getStatus() {

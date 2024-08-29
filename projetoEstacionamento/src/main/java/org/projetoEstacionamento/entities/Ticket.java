@@ -12,13 +12,7 @@ public class Ticket {
     private double totalValor;
 
 
-    public Ticket(String cancelaEntrada, String cancelaSaida, String horaEntrada, String horaSaida, Integer vaga, Integer totalValor) {
-        this.cancelaEntrada = cancelaEntrada;
-        this.cancelaSaida = cancelaSaida;
-        this.horaEntrada = Timestamp.valueOf(horaEntrada);
-        this.horaSaida = Timestamp.valueOf(horaSaida);
-        this.vaga = vaga;
-        this.totalValor = totalValor;
+    public Ticket() {
     }
 
     public String getCancelaEntrada() {
