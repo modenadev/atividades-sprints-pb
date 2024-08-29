@@ -1,6 +1,5 @@
 package org.projetoEstacionamento.dao;
 
-import org.projetoEstacionamento.entities.Vaga;
 import org.projetoEstacionamento.entities.Veiculo;
 
 import java.sql.*;
@@ -33,6 +32,24 @@ public class VeiculoDAO {
                 System.out.println("Erro ao adicionar veículo: " + e.getMessage());
             }
         }
+    }
+
+    public static Veiculo buscarVeiculo(String placa) throws SQLException {
+        String sql = "SELECT * FROM veiculos WHERE placa = ?";
+        try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, placa);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Veiculo veiculo = new Veiculo();
+                veiculo.setPlaca(rs.getString("placa"));
+                veiculo.setTipo(rs.getString("tipo"));
+                veiculo.setCategoria(rs.getString("categoria"));
+                veiculo.setMensalista(rs.getBoolean("mensalista"));
+                return veiculo;
+
+            }
+        }
+        return null;
     }
 
     public List<Veiculo> listarVeiculos() throws SQLException {
