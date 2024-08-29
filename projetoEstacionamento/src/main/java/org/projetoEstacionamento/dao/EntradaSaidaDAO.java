@@ -1,6 +1,4 @@
 package org.projetoEstacionamento.dao;
 
-public class TicketDAO {
-
-
+public class EntradaSaidaDAO {
 }
