@@ -24,6 +24,22 @@ public class TicketsDAO {
         }
     }
 
+    public static boolean verificarEntrada(String placa) throws SQLException {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "SELECT COUNT(*) FROM tickets WHERE placa = ? AND hora_saida IS NULL";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, placa);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getInt(1) > 0;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
     public static void registrarSaida(String placa, int cancelaSaida) throws SQLException {
         Ticket ticket = buscarTicketPorPlaca(placa); // Supondo que você tenha um método para buscar o ticket
         if (ticket == null) {

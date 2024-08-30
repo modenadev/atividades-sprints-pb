@@ -24,7 +24,7 @@ public class Program {
 
             switch (opcao) {
                 case 1:
-                    //Veiculo entrante
+                    //Veículo entrando
                     System.out.print("Digite a placa do veículo: ");
                     String placa = scanner.nextLine();
                     System.out.print("Digite o tipo do veículo (Carro, Moto, Caminhao, ServicoPublico): ");
@@ -32,22 +32,26 @@ public class Program {
                     System.out.print("O veículo é mensalista? (sim/não): ");
                     boolean mensalista = scanner.nextLine().equalsIgnoreCase("sim");
 
-                    int cancelaEntrada = getCatracaEntrada(tipo, mensalista);
-                    if (cancelaEntrada == -1) {
-                        System.out.println("Veículo de serviço público tem acesso livre.");
-                    } else if (VagaDAO.verificarVagaDisponivel(tipo)) {
-                        TicketsDAO.registrarEntrada(placa, cancelaEntrada);
-                        VagaDAO.atualizarVaga(getVagaDisponivel(tipo), true);
+                    // Verifica se o veículo já está no estacionamento
+                    if (TicketsDAO.verificarEntrada(placa)) {
+                        System.out.println("Veículo já está no estacionamento. Registre a saída antes de tentar entrar novamente.");
                     } else {
-                        System.out.println("Não há vagas disponíveis para o tipo de veículo.");
+                        int cancelaEntrada = getCatracaEntrada(tipo, mensalista);
+                        if (cancelaEntrada == -1) {
+                            System.out.println("Veículo de serviço público tem acesso livre.");
+                        } else if (VagaDAO.verificarVagaDisponivel(tipo)) {
+                            TicketsDAO.registrarEntrada(placa, cancelaEntrada);
+                            VagaDAO.atualizarVaga(getVagaDisponivel(tipo), true);
+                        } else {
+                            System.out.println("Não há vagas disponíveis para o tipo de veículo.");
+                        }
                     }
                     break;
 
                 case 2:
-                    //Veiculo saindo
+                    //Veículo saindo
                     System.out.print("Digite a placa do veículo: ");
                     String placaSaida = scanner.nextLine();
-
 
                     String tipoSaida = getTipoVeiculoPorPlaca(placaSaida);
 
@@ -93,5 +97,15 @@ public class Program {
                 throw new IllegalArgumentException("Tipo de veículo inválido.");
         }
     }
-    
+
+    private static int getVagaDisponivel(String tipo) {
+        // Implementar a lógica para obter a vaga disponível
+        return 0;
+    }
+
+    private static String getTipoVeiculoPorPlaca(String placa) {
+        // Implementar a lógica para obter o tipo de veículo com base na placa
+        // Isso pode envolver consultar o banco de dados
+        return "Carro"; // Substitua com a lógica real
+    }
 }
