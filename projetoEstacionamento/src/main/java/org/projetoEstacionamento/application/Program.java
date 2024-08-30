@@ -2,12 +2,9 @@ package org.projetoEstacionamento.application;
 
 import org.projetoEstacionamento.dao.TicketsDAO;
 import org.projetoEstacionamento.dao.VagaDAO;
-import org.projetoEstacionamento.dao.VeiculoDAO;
 import org.projetoEstacionamento.entities.Vaga;
-import org.projetoEstacionamento.entities.VeiculoMensalista;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Program {
@@ -27,16 +24,19 @@ public class Program {
 
             switch (opcao) {
                 case 1:
+                    //Veiculo entrante
                     System.out.print("Digite a placa do veículo: ");
                     String placa = scanner.nextLine();
                     System.out.print("Digite o tipo do veículo (Carro, Moto, Caminhao, ServicoPublico): ");
                     String tipo = scanner.nextLine();
-                    System.out.print("Digite a cancela de entrada: ");
-                    int cancelaEntrada = scanner.nextInt();
-                    scanner.nextLine();
+                    System.out.print("O veículo é mensalista? (sim/não): ");
+                    boolean mensalista = scanner.nextLine().equalsIgnoreCase("sim");
 
-                    if (VagaDAO.verificarVagaDisponivel(tipo)) {
-                        TicketsDAO.registrarEntrada(placa, tipo, cancelaEntrada);
+                    int cancelaEntrada = getCatracaEntrada(tipo, mensalista);
+                    if (cancelaEntrada == -1) {
+                        System.out.println("Veículo de serviço público tem acesso livre.");
+                    } else if (VagaDAO.verificarVagaDisponivel(tipo)) {
+                        TicketsDAO.registrarEntrada(placa, cancelaEntrada);
                         VagaDAO.atualizarVaga(getVagaDisponivel(tipo), true);
                     } else {
                         System.out.println("Não há vagas disponíveis para o tipo de veículo.");
@@ -44,13 +44,19 @@ public class Program {
                     break;
 
                 case 2:
+                    //Veiculo saindo
                     System.out.print("Digite a placa do veículo: ");
                     String placaSaida = scanner.nextLine();
-                    System.out.print("Digite a cancela de saída: ");
-                    int cancelaSaida = scanner.nextInt();
-                    scanner.nextLine();
 
-                    TicketsDAO.registrarSaida(placaSaida, cancelaSaida);
+
+                    String tipoSaida = getTipoVeiculoPorPlaca(placaSaida);
+
+                    int cancelaSaida = getCatracaSaida(tipoSaida);
+                    if (cancelaSaida == -1) {
+                        System.out.println("Veículo de serviço público tem acesso livre.");
+                    } else {
+                        TicketsDAO.registrarSaida(placaSaida, cancelaSaida);
+                    }
                     break;
 
                 default:
@@ -60,8 +66,32 @@ public class Program {
         }
     }
 
-    private static int getVagaDisponivel(String tipo) {
-        // Implementar a lógica para obter a vaga disponível
-        return 0;
+    private static int getCatracaEntrada(String tipo, boolean mensalista) {
+        switch (tipo) {
+            case "Carro":
+                return mensalista ? 1 : 2; // Exemplo: mensalista usa cancela 1, avulso usa cancela 2
+            case "Moto":
+                return mensalista ? 5 : 6; // Exemplo: mensalista usa cancela 5, avulso usa cancela 6
+            case "Caminhao":
+                return 1; // Caminhões de entrega usam a cancela 1
+            case "ServicoPublico":
+                return -1; // Veículos de serviço público têm acesso livre, não precisa de cancela
+            default:
+                throw new IllegalArgumentException("Tipo de veículo inválido.");
+        }
     }
+
+    private static int getCatracaSaida(String tipo) {
+        switch (tipo) {
+            case "Carro":
+            case "Moto":
+            case "Caminhao":
+                return 6; // Exemplo: todos saem pela cancela 6
+            case "ServicoPublico":
+                return -1; // Veículos de serviço público têm acesso livre
+            default:
+                throw new IllegalArgumentException("Tipo de veículo inválido.");
+        }
+    }
+    
 }
