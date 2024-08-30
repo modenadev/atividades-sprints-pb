@@ -9,7 +9,7 @@ public class Program {
         System.out.println("Projeto");
 
         Connection conn = DB.getConnection();
-        DB.closeConnection();
+
 
     }
 }

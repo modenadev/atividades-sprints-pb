@@ -1,65 +1,94 @@
 package org.projetoEstacionamento.entities;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Ticket {
 
-    private String cancelaEntrada;
-    private String cancelaSaida;
-    private Timestamp horaEntrada;
-    private Timestamp horaSaida;
-    private int vaga;
-    private double totalValor;
+    private int id;
+    private String placa;
+    private String tipo;
+    private Date horaEntrada;
+    private Date horaSaida;
+    private int cancelaEntrada;
+    private int cancelaSaida;
+    private int vagaOcupada;
+    private double valor;
 
 
     public Ticket() {
+
     }
 
-    public String getCancelaEntrada() {
-        return cancelaEntrada;
+    public int getId() {
+        return id;
     }
 
-    public void setCancelaEntrada(String cancelaEntrada) {
-        this.cancelaEntrada = cancelaEntrada;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getCancelaSaida() {
-        return cancelaSaida;
+    public String getPlaca() {
+        return placa;
     }
 
-    public void setCancelaSaida(String cancelaSaida) {
-        this.cancelaSaida = cancelaSaida;
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
-    public Timestamp getHoraEntrada() {
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Date getHoraEntrada() {
         return horaEntrada;
     }
 
-    public void setHoraEntrada(String horaEntrada) {
-        this.horaEntrada = Timestamp.valueOf(horaEntrada);
+    public void setHoraEntrada(Date horaEntrada) {
+        this.horaEntrada = horaEntrada;
     }
 
-    public Timestamp getHoraSaida() {
+    public Date getHoraSaida() {
         return horaSaida;
     }
 
-    public void setHoraSaida(String horaSaida) {
-        this.horaSaida = Timestamp.valueOf(horaSaida);
+    public void setHoraSaida(Date horaSaida) {
+        this.horaSaida = horaSaida;
     }
 
-    public Integer getVaga() {
-        return vaga;
+    public int getCancelaSaida() {
+        return cancelaSaida;
     }
 
-    public void setVaga(Integer vaga) {
-        this.vaga = vaga;
+    public void setCancelaSaida(int cancelaSaida) {
+        this.cancelaSaida = cancelaSaida;
     }
 
-    public Integer getTotalValor() {
-        return (int) totalValor;
+    public int getCancelaEntrada() {
+        return cancelaEntrada;
     }
 
-    public void setTotalValor(Integer totalValor) {
-        this.totalValor = totalValor;
+    public void setCancelaEntrada(int cancelaEntrada) {
+        this.cancelaEntrada = cancelaEntrada;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public int getVagaOcupada() {
+        return vagaOcupada;
+    }
+
+    public void setVagaOcupada(int vagaOcupada) {
+        this.vagaOcupada = vagaOcupada;
     }
 }
