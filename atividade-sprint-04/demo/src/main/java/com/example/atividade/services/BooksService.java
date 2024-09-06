@@ -17,4 +17,10 @@ public class BooksService {
 
         return booksRepository.findAll();
     }
+
+    public void deleteBookByTitle(String title) {
+        booksRepository.findAll().stream()
+                .filter(book -> book.getTitle().equals(title))
+                .forEach(book -> booksRepository.deleteById(book.getId()));
+    }
 }

@@ -27,6 +27,5 @@ public class Instantiation implements CommandLineRunner {
 
         booksRepository.saveAll(Arrays.asList(book,domCasmuro,lordOfRings,animalFarm));
 
-
     }
 }
