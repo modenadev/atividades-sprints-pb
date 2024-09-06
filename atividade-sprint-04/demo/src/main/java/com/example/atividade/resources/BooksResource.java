@@ -27,5 +27,18 @@ public class BooksResource {
         booksService.deleteBookByTitle(title);
     }
 
+    @PutMapping("/update/{title}")
+    public void updateBook(@PathVariable String title, @RequestParam String year) {
+        booksService.updateBookYear(title, Integer.parseInt(year));
+    }
 
+    @GetMapping("/autor/{autor}")
+    public List<Book> getBooksByAutor(@PathVariable String autor) {
+        return booksService.findBooksByAuthor(autor);
+    }
+
+    @GetMapping("/publishedAfter/{year}")
+    public List<Book> getBooksPublishedAfter(@PathVariable int year) {
+        return booksService.findBooksPublishedAfter(year);
+    }
 }
