@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "66db602a70d0d21fc3fe266c"
+  },
+  "autor": "George Orwell",
+  "title": "1984",
+  "year": "1949",
+  "genre": "Ficção cientifica",
+  "_class": "com.example.atividade.domain.Book"
+},
+{
+  "_id": {
+    "$oid": "66db602a70d0d21fc3fe266d"
+  },
+  "autor": "Machado de Assis",
+  "title": "Dom Casmurro",
+  "year": "1899",
+  "genre": "Romance",
+  "_class": "com.example.atividade.domain.Book"
+},
+{
+  "_id": {
+    "$oid": "66db602a70d0d21fc3fe266e"
+  },
+  "autor": "J.R.R Tolkien",
+  "title": "The Lord of the Rings",
+  "year": "1954",
+  "genre": "Fantasia",
+  "_class": "com.example.atividade.domain.Book"
+},
+{
+  "_id": {
+    "$oid": "66db602a70d0d21fc3fe266f"
+  },
+  "autor": "George Orwell",
+  "title": "Animal Farm",
+  "year": "1945",
+  "genre": "Fábula",
+  "_class": "com.example.atividade.domain.Book"
+}]
